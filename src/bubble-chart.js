@@ -47,28 +47,22 @@ const bubbleChart = (el) => {
     .selectAll("text")
     .data(leaves)
     .enter().append("text")
-      // Set text color depending on background.
       .attr("fill", d => d3.lab(d.data.color).l < 60 ? lightBG : darkBG)
       .attr("transform", d => {
         const {lines, radius} = fit(d.data.name);
-        console.log(lines, radius, d.r);
+        console.log(d.data);
         d.lines = lines;
+        // ISSUE WITH SCALE VALUE
+        // Radius is NaN
         return `translate(${d.x},${d.y}) scale(${Math.min(3, 0.9 * d.r / radius)})`;
       })
-      // .attr("opacity", function(d) {
-      //   if (d.data.value > 4) {
-      //     return 1;
-      //   } else {
-      //     return 0;
-      //   }
-      // })
     .selectAll("tspan")
     .data(d => d.lines)
     .enter().append("tspan")
       .attr("x", 0)
       .attr("y", (d, i, data) => (i - data.length / 2 + 0.8) * 12)
       .text(d => d.text)
-      .attr("font-family", "Circular")
+      .attr("font-family", "Circular Std")
 }
 
 export default bubbleChart;

@@ -15,7 +15,7 @@ export const Pack = (width, height) => (
 export function fit(text, value) {
   let line;
   let lineWidth0 = Infinity;
-  const lineHeight = 12;
+  const lineHeight = 0;
   const targetWidth = Math.sqrt(measureWidth(text.trim()) * lineHeight);
   const words = text.split(/\s+/g); // To hyphenate: /\s+|(?<=-)/
   if (!words[words.length - 1]) words.pop();
@@ -24,7 +24,7 @@ export function fit(text, value) {
   for (let i = 0, n = words.length; i < n; ++i) {
     let lineText1 = (line ? line.text + " " : "") + words[i];
     let lineWidth1 = measureWidth(lineText1);
-    if ((lineWidth0 + lineWidth1) * .4 < targetWidth) {
+    if ((lineWidth0 + lineWidth1) * 0.4 < targetWidth) {
       line.width = lineWidth0 = lineWidth1;
       line.text = lineText1;
     } else {
@@ -37,8 +37,8 @@ export function fit(text, value) {
   let radius = 0;
   for (let i = 0, n = lines.length; i < n; ++i) {
     const dy = (Math.abs(i - n / 2 + 0.5) + 0.5) * lineHeight;
-    const dx = lines[i].width / 2;
-    radius = Math.max(radius, Math.sqrt(dx ** 2 + dy ** 2));
+    const dx = lines[i].width() / 2;
+    radius = Math.max(radius, Math.sqrt(dx ** 2 + dy ** 2)) + 7;
   }
   return {lines, radius};
 }
