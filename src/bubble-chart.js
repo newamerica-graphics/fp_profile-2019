@@ -50,7 +50,6 @@ const bubbleChart = (el) => {
       .attr("fill", d => d3.lab(d.data.color).l < 60 ? lightBG : darkBG)
       .attr("transform", d => {
         const {lines, radius} = fit(d.data.name);
-        console.log(d.data);
         d.lines = lines;
         // ISSUE WITH SCALE VALUE
         // Radius is NaN
