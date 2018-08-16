@@ -1,5 +1,7 @@
 import data from './data';
-import * as d3 from 'd3';
+import { select, selectAll } from 'd3-selection';
+import { scaleLinear } from 'd3-scale';
+import { lab } from 'd3-color';
 import { fit, measureWidth, Pack, format } from './utils';
 
 let height = 1800;
@@ -19,10 +21,10 @@ const lightBG = "#333333";
 const fillColor = "#dddddd";
 
 // Calculate continuous gradient value.
-const gradient = d3.scaleLinear().domain([0, 18]).range([lowColor, highColor]);
+const gradient = scaleLinear().domain([0, 18]).range([lowColor, highColor]);
 
 const bubbleChart = (el) => {
-  const svg = d3.select(el).append('svg')
+  const svg = select(el).append('svg')
       .attr('viewBox', `0 0 ${width} ${height}`)
       .style("background", "#fff")
       .style("width", "100%")
@@ -47,7 +49,7 @@ const bubbleChart = (el) => {
     .selectAll("text")
     .data(leaves)
     .enter().append("text")
-      .attr("fill", d => d3.lab(d.data.color).l < 60 ? lightBG : darkBG)
+      .attr("fill", d => lab(d.data.color).l < 60 ? lightBG : darkBG)
       .attr("transform", d => {
         const {lines, radius} = fit(d.data.name);
         d.lines = lines;

@@ -1,13 +1,16 @@
-import * as d3 from 'd3';
+import { format as d3format } from 'd3-format';
+import { pack, hierarchy } from 'd3-hierarchy';
+import { median } from 'd3-array';
+
 
 export const Pack = (width, height) => (
   data => {
-    let alt = d3.median(data, d => d.value);
+    let alt = median(data, d => d.value);
     if (!alt) alt = 1;
-    return d3.pack()
+    return pack()
       .size([width, height])
         .padding(3)
-      (d3.hierarchy({children: data})
+      (hierarchy({children: data})
         .sum(d => isNaN(d.value) ? alt : d.value));
   }
 );
@@ -43,7 +46,7 @@ export function fit(text, value) {
   return {lines, radius};
 }
 
-export const format = d3.format(",d")
+export const format = d3format(",d")
 
 export const measureWidth = () => {
   const context = document.createElement("canvas").getContext("2d");
