@@ -38,10 +38,10 @@ module.exports = {
       },
       {
         test: /\.s?css/,
-        use: ENV === 'development' ? ExtractTextPlugin.extract({
+        use: ENV === 'production' ? ["css-loader", "sass-loader"] : ExtractTextPlugin.extract({
           fallback: "style-loader",
           use: ["css-loader", "sass-loader"]
-        }) : ["css-loader", "sass-loader"]
+        }) 
       }
     ]
   }
