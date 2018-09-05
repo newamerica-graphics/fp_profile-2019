@@ -63,7 +63,7 @@ const bubbleChart = (el) => {
       .attr("x", 0)
       .attr("y", (d, i, data) => (i - data.length / 2 + 0.8) * 12)
       .text(d => d.text)
-      .attr("font-family", "Circular Std")
+      .attr("font-family", "Circular")
 }
 
 export default bubbleChart;
